@@ -1,3 +1,4 @@
+<?php include '../views/shares/header.php'; ?>
 <h2>Sửa sinh viên</h2>
 <form method="POST">
     <div>
@@ -21,7 +22,7 @@
     </div>
     <div>
         <label>Hình:</label>
-        <input type="text" name="Hinh" value="<?php echo $student['Hinh']; ?>">
+        <input type="file" name="Hinh" value="<?php echo $student['Hinh']; ?>">
     </div>
     <div>
         <label>Mã ngành:</label>
@@ -33,3 +34,4 @@
     <button type="submit">Cập nhật</button>
 </form>
 <a href="?controller=student&action=index">Quay lại</a>
+<?php include '../views/shares/footer.php'; ?>
