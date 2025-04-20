@@ -1,9 +1,7 @@
 package com.example.studentmanagement.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,8 +12,10 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dateOfBirth;
     private String gender;
+    @Column(nullable = false)
     private String email;
     private String phone;
 
