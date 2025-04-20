@@ -5,24 +5,32 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name="students")
 public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String gender;
     @Column(nullable = false)
     private String email;
     private String phone;
-
+    @ManyToMany
+    @JoinTable(
+            name = "student_subject",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private Set<Subject> subjects = new HashSet<>();
     public Student() {
     }
 
-    public Student(Long id, String name, Date dateOfBirth, String gender, String email, String phone) {
+    public Student(Long id, String name, String dateOfBirth, String gender, String email, String phone) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -47,11 +55,11 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -89,5 +97,13 @@ public class Student implements Serializable {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 }

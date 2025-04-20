@@ -33,4 +33,14 @@ public class StudentResource {
         Student newStudent = studentService.createStudent(student);
         return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
     }
+    @PutMapping()
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student){
+         Student updatedStudent = studentService.updateStudent(student);
+         return new ResponseEntity<>(updatedStudent,HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable("id") Long id){
+        studentService.deleteStudent(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
