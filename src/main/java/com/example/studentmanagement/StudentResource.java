@@ -65,6 +65,6 @@ public class StudentResource {
     @GetMapping("/{studentId}/subjects")
     public ResponseEntity<Set<Subject>> getSubjects(@PathVariable("studentId") Long studentId){
         Set<Subject> subjects = studentService.getSubjects(studentId);
-        return new ResponseEntity<>(subjects, HttpStatus.OK);
+        return new ResponseEntity<>(subjects,HttpStatus.OK);
     }
 }

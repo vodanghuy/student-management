@@ -56,6 +56,11 @@ public class StudentService {
                 .orElseThrow(() -> new RuntimeException(("Student not found with id: "+ studentId)));
         Subject subject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException(("Subject not found with id: "+ subjectId)));
+        for(Subject s : student.getSubjects()){
+            if(s.getId().equals(subjectId)){
+                throw new RuntimeException("Subjects existed");
+            }
+        }
         student.getSubjects().add(subject);
         subject.setAvailableSlot(subject.getAvailableSlot()-1);
         subjectRepository.save(subject);
